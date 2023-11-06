@@ -1,20 +1,40 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+// import { View, Text } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+import HomeScreen from "./HomeScreen";
+import DetailScreen from "./DetailScreen";
+import ProfileScreen from "./ProfileScreen";
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+// Membuat tumpukan navigasi (stack navigator) dengan menggunkan libary React Navigasi
+const Stack = createStackNavigator();
+
+const App = () => {
+    return(
+        // <View>
+        //     <Text>
+        //         Satu
+        //     </Text>
+        // </View>
+
+        // mengelola navigasi dalam aplikasi menggunakan React Navigation
+        <NavigationContainer>
+            {/* Inisialisasi tumpukan navigator dengan rute awal yang ditentukan sebagai "Home" */}
+            <Stack.Navigator initialRouteName="Home">
+                {/* Setiap "Stack.Screen" mrepresentasikan satu rute (layar) dalam tumpukan navigator. Anda dapat menambahkan lebih banyak Stack.Screen sesuai dengan kebutuhan aplikasi. */}
+                {/* Contoh: */}
+                {/* <Stack.Screen name="NamaRute" component={NamaRuteComponent} /> */}
+
+                {/* Layar "Home" akan menggunakan komponen HomeScreen untuk tampilannya */}
+                <Stack.Screen name="Home" component={HomeScreen} />
+                {/* Layar "Details" akan menggunakan komponen DetailScreen untuk tampilannya */}
+                <Stack.Screen name="Details" component={DetailScreen} />
+                {/* Layar "Profiles" akan menggunakan komponen ProfilesScreen untuk tampilannya */}
+                <Stack.Screen name="Profiles" component={ProfileScreen} />
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
+};
+
+export default App;
